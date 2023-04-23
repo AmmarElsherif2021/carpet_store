@@ -14,8 +14,8 @@ class Carpet:
     def getMPrice(self):
         return self.__price_m
     def setTotalPrice(self,newPrice):
-        old_price=self.w*self.l*self.__price_m
-        self.__price_m=old_price/newPrice
+        #old_price = self.w * self.l * self.__price_m
+        self.__price_m=newPrice/(self.w*self.l)
     def getTotalprice(self):
         return self.w*self.l*self.__price_m
     def getCarpet(self):
@@ -24,6 +24,8 @@ class Carpet:
         pass #maybe added to cart class
 
 class Roll(Carpet):
+    def __init__(self,model,w,l,price_m):
+        super().__init__(model,w,l,price_m)
     getRemained=False
     def setSize(self,trimmed_l):
         if trimmed_l <= self.l and self.l>0:
@@ -32,7 +34,8 @@ class Roll(Carpet):
             print('Only ${self.l} is available') #prompot some input
     def getLength(self):
         return self.l
-    def getTrimmedSize(self):
+    def trim(self,trimmed_l):
+        carpet= Carpet(self.model,self.w,trimmed_l,self.price_m)
         return
     def getCarpet(self):
         return [self.__Id,self.model,self.getSize(),self.getTotalprice()]
